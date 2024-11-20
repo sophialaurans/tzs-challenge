@@ -1,0 +1,615 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+
+/* geral */
+body {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a3a3a;
+    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    font-style: normal;
+    font-weight: 400;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.characters-container,
+.index-container,
+.start-container {
+    position: relative;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.characters-container::before,
+.index-container::before,
+.start-container::before {
+    content: "";
+    position: fixed;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: 100vh;
+    background: 
+        repeating-linear-gradient(0deg,  
+            rgba(255, 255, 255, 0.1), 
+            rgba(255, 255, 255, 0.1) .2em, 
+            rgba(0, 0, 0, 0.1) .2em, 
+            rgba(0, 0, 0, 0.1) .4em
+        );
+    opacity: 0.2; /* Ajuste da opacidade para ver o conteúdo */
+    pointer-events: none;
+    z-index: 9998;
+    animation: tvStaticLines 0.2s steps(10) infinite;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+}
+
+.characters-container::after,
+.index-container::after,
+.start-container::after {
+    content: "";
+    position: fixed;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: 100vh;
+    background: 
+    repeating-linear-gradient(
+        0deg, 
+        rgba(255, 255, 255, 0.1), 
+        rgba(255, 255, 255, 0.1) .1em, 
+        rgba(0, 0, 0, 0.1) .1em, 
+        rgba(0, 0, 0, 0.1) .1em
+    ),
+    repeating-linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0.1), 
+        rgba(255, 255, 255, 0.1) .1em, 
+        rgba(0, 0, 0, 0.1) .2em, 
+        rgba(0, 0, 0, 0.1) .2em
+    );
+    opacity: 0.2; /* Ajuste da opacidade para o granulado */
+    pointer-events: none;
+    z-index: 9999;
+    animation: tvStaticGrain 0.1s steps(10) infinite;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+}
+
+/* index */
+.index {
+    overflow: hidden;
+    position: fixed;
+    display: flex;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: 100vh;
+    justify-content: center;
+}
+
+.index-container {
+    background: url("img/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    animation: floatBackground 40s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 1s ease;
+}
+
+.logo.grow {
+    transform: scale(15);
+}
+
+.press-start {
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    animation: blink 0.2s ease infinite;
+    top: 70%;
+}
+
+.dark-overlay {
+    background: rgb(0, 0, 0);
+    z-index: 1000;
+    position: fixed;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.dark-overlay.active {
+    opacity: 1;
+}
+
+/* select */
+.characters-container {
+    background: url("img/bg2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.title {
+    position: absolute;
+    top: 0;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: auto;
+    display: flex;
+    padding: 1vh 0;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 40px 0 rgba(0,0,0,0.9);
+    z-index: 10;
+    transition: all 1s ease;
+}
+
+.title.hide {
+    animation: slideTop 0.5s ease forwards;
+}
+
+.title h1 {
+    text-align: center;
+    font-size: 2rem;
+    text-decoration: none;
+    color: rgb(0, 0, 49);
+    margin: 15px 0;
+}
+
+.characters {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 2vh;
+}
+
+.characters-list {
+    display: flex;
+    gap: 5px;
+}
+
+.characters-column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.character {
+    position: relative;
+    width: 11vh;
+    height: 11vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.character img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    -webkit-filter: brightness(80%);
+    filter: brightness(80%);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.character.selected img {
+    -webkit-filter: brightness(120%);
+    filter: brightness(120%);
+    position: relative;
+    z-index: 2;
+    box-shadow: 1px 1px 10px 0 white;
+    animation: border 0.2s ease-in-out infinite;
+}
+
+.character p {
+    position: absolute;
+    color: white;
+    font-size: 0.6rem;
+    text-align: center;
+    border: 2px solid transparent;
+    z-index: 4;
+}
+
+.character-container {
+    width: 20vw;
+    display: flex;
+    justify-content: right;
+    transition: transform 1s ease;
+    justify-content: center;
+}
+
+.char-img {
+    position: relative;
+    max-height: 65vh;
+    max-width: 30vw;
+    transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.character-container p {
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    width: 100%;
+    max-width: 30vw;
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.582), #09004391, #090043, rgba(0, 0, 0, 0.582), transparent);
+    padding: 10px 0;
+    display: none;
+}
+
+.options {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 3vh;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: auto;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.445), rgba(0, 0, 0, 0.74), black);
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+    transition: all 1s ease;
+}
+
+.options.hide {
+    animation: slideBottom 0.5s ease forwards;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+}
+
+.option p {
+    margin: 0;
+    padding: 0.5em;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.option img {
+    width: auto;
+    height: 2em;
+}
+
+/* select - dinamismo */
+.title-selected {
+    position: absolute;
+    top: 0;
+    height: auto;
+    padding-top: 5vh;
+    justify-content: center;
+    z-index: 10;
+    transition: transform 0.5s ease;
+    display: none;
+    animation: slideFromLeft 0.5s ease-out;
+}
+
+.title-selected h1 {
+    font-size: 2rem;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.name-selected {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 3vh;
+    height: auto;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    display: none;
+    animation: slideFromRight 0.5s ease-out;
+}
+
+.name-selected h1 {
+    font-size: 2rem;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.character-container.zoom {
+    transform: scale(200);
+}
+
+
+/* start */
+
+.start-container {
+    background: url("img/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    animation: moveBg 0.4s ease-in-out infinite;
+    animation-iteration-count: 8;
+}
+
+.start-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.start-content p {
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+}
+
+#p1 {
+    display: block;
+    animation: blink 0.2s ease infinite;
+}
+
+#p2 {
+    display: none;
+    animation: blink 0.2s ease infinite;
+}
+
+#p3 {
+    font-size: 5rem;
+    display: none;
+}
+
+.dark-overlay-top {
+    position: absolute;
+    bottom: 100%;
+    background: rgb(0, 0, 0);
+    z-index: 1000;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: 100vh;
+    transition: transform 0.2s ease;
+}
+
+.dark-overlay-top.active {
+    animation: darkTop 1s ease forwards;
+}
+
+.dark-overlay-bottom {
+    position: absolute;
+    top: 100%;
+    background: rgb(0, 0, 0);
+    z-index: 1000;
+    width: calc(100vh * 4 / 3);
+    max-width: 100vw;
+    height: 100vh;
+    transition: transform 0.2s ease;
+}
+
+.dark-overlay-bottom.active {
+    animation: darkBottom 1s ease forwards;
+}
+
+
+/* ### animações ### */
+
+/* efeito estático tv */
+@keyframes tvStaticLines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+@keyframes tvStaticGrain {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-5px, -5px); }
+}
+
+/* leve movimento do background */
+@keyframes floatBackground {
+    0% {
+        background-position: 50% 50%;
+    }
+    10% {
+        background-position: 47% 53%;
+    }
+    20% {
+        background-position: 52% 48%;
+    }
+    30% {
+        background-position: 49% 52%;
+    }
+    40% {
+        background-position: 53% 47%;
+    }
+    50% {
+        background-position: 50% 50%;
+    }
+    60% {
+        background-position: 48% 52%;
+    }
+    70% {
+        background-position: 52% 49%;
+    }
+    80% {
+        background-position: 51% 51%;
+    }
+    90% {
+        background-position: 49% 50%;
+    }
+    100% {
+        background-position: 50% 50%;
+    }
+}
+
+/* efeito pisca pisca */
+@keyframes blink {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* efeito da borda pisca pisca */
+@keyframes border {
+    0% { border: 2px solid transparent; }
+    100% { border: 2px solid white; }
+}
+
+/* movimentar para o topo da página */
+@keyframes slideTop {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    99% { opacity: 1; }
+
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+/* movimentar para a base da página */
+@keyframes slideBottom {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    99% { opacity: 1; }
+
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* movimentar a partir do lado esquerdo da página */
+@keyframes slideFromLeft {
+    0% {
+        transform: translateX(-110%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* movimentar a partir do lado direito da página */
+@keyframes slideFromRight {
+    0% {
+        transform: translateX(60%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* aumentar o tamanho do background */
+@keyframes bgZoom {
+    0% {
+        background-size: 100%;
+    }
+
+    100% {
+        background-size: 190%;
+    }
+}
+
+/* aumentar e diminuir o tamanho do background */
+@keyframes moveBg {
+    0% {
+        background-size: 100%;
+    }
+
+    10% {
+        background-size: 110%;
+    }
+
+    20% {
+        background-size: 120%;
+    }
+
+    30% {
+        background-size: 130%;
+    }
+
+    40% {
+        background-size: 140%;
+    }
+    
+    50% {
+        background-size: 150%;
+    }
+
+    60% {
+        background-size: 140%;
+    }
+
+    70% {
+        background-size: 130%;
+    }
+
+    80% {
+        background-size: 120%;
+    }
+
+    90% {
+        background-size: 110%;
+    }
+
+    100% {
+        background-size: 100%;
+    }
+}
+
+/* movimentar do topo a base */
+@keyframes darkTop {
+    0% {       
+        transform: translateY(0);
+    }
+
+    100% {       
+        transform: translateY(100%);
+    }
+}
+
+/* movimentar da base ao topo */
+@keyframes darkBottom {
+    0% {       
+        transform: translateY(0);
+    }
+
+    100% {       
+        transform: translateY(-100%);
+    }
+}
