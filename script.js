@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
 
         // Dinamismo na página index ao pressionar as teclas Espaço ou Enter
-        if ((window.location.endsWith('/') || window.location.pathname.includes('index')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
+        if ((window.location.pathname.endsWith('/') || window.location.pathname.includes('index')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
             const logo = document.querySelector('.logo');
             logo.classList.add('grow');
 
