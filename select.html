@@ -6,17 +6,17 @@
         <meta name="author" content="Marcos Paulo Coelho, Sophia Silva">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
-        <script src="script.js" defer></script></script>
+        <script src="script.js" defer></script>
     </head>
     <body>
         <main>
             <div class="title">
                 <h1>SELECT YOUR RENDER HERO</h1>
             </div>
-            <div class="title-selected"> <!-- inicialmente com display none -->
-                <h1>SELECTED</h1>
-            </div>
             <section class="characters-container">
+                <div class="title-selected"> <!-- inicialmente com display none -->
+                    <h1>SELECTED</h1>
+                </div>
                 <div class="characters">
                     <div class="characters-list">
                         <!-- primeira coluna -->
@@ -119,6 +119,9 @@
                         <p></p>
                     </div>
                 </div>
+                <div class="name-selected"> <!-- inicialmente com display none -->
+                    <h1></h1>
+                </div>
             </section>
             <section class="options">
                 <div class="option">
@@ -130,9 +133,6 @@
                     <p>Select</p>
                 </div>
             </section>
-            <div class="name-selected"> <!-- inicialmente com display none -->
-                <h1></h1>
-            </div>
             <div class="dark-overlay"></div> <!-- inicialmente com display none -->
         </main>
     </body>

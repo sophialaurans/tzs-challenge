@@ -104,13 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 2800);
 
                 setTimeout(() => {
-                    darkOverlay.style.transition = 'opacity 0.2s';
+                    darkOverlay.style.transition = 'opacity 0.2s ease';
                     darkOverlay.classList.add('active');
-                }, 2900);
+                }, 2800);
 
                 setTimeout(() => {
                     window.location.href = 'start.html'; // Navegar para a tela start ao final das mudanças
-                }, 3000);
+                }, 3050);
             }
         }
 

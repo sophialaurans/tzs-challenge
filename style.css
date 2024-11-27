@@ -222,6 +222,7 @@ main {
     height: 100%;
     -webkit-filter: brightness(80%);
     filter: brightness(80%);
+    background-color: #00000085;
     border: 2px solid rgb(0, 0, 0);
 }
 
