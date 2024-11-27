@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
 
         // Dinamismo na página index ao pressionar as teclas Espaço ou Enter
-        if ((window.location.pathname === "/" || window.location.pathname.endsWith('index.html')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
+        if ((window.location.endsWith('/') || window.location.pathname.includes('index')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
             const logo = document.querySelector('.logo');
             logo.classList.add('grow');
 
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Dinamismo na página select
-        if ((window.location.pathname.endsWith('select.html'))) {
+        if ((window.location.pathname.includes('select'))) {
             if (e.key === 'o' || e.key === 'O') {
                 window.location.href = 'index.html'; // Voltar para index ao pressionar a letra "O" do teclado
             }
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Voltar para a página select ao pressionar a letra "O" do teclado
-        if ((window.location.pathname.endsWith('start.html'))) {
+        if ((window.location.pathname.includes('start'))) {
             if (e.key === 'o' || e.key === 'O') {
                 window.location.href = 'select.html';
             }
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Dinamismo na página start
-    if ((window.location.pathname.endsWith('start.html'))) {
+    if ((window.location.pathname.includes('start'))) {
         const p1 = document.getElementById('p1');
         const p2 = document.getElementById('p2');
         const p3 = document.getElementById('p3');
