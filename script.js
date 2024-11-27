@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSelection(characters); // Atualiza a seleção dos personagens ao iniciar a página
 
     document.addEventListener('keydown', (e) => {        
+        console.log(e.key);
+        console.log(window.location);
+
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
             const totalRows = 6;
             const totalCharacters = characters.length;
