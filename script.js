@@ -14,8 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(window.location);
 
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-            const totalRows = 6;
+            const totalRows = 7;
             const totalCharacters = characters.length;
+
+            const transitionSound = new Audio('transition_es.wav');
 
             switch (e.key) {
                 case 'ArrowUp':
@@ -54,6 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     break;
             }
+
+            transitionSound.currentTime = 0;
+            transitionSound.volume = 1;
+            transitionSound.play();
     
             updateSelection(); // Atualiza a seleção dos personagens sempre que uma das teclas for pressionada
         }
@@ -94,6 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 options.classList.add('hide');
 
                 characterNameP.style.display = 'none';
+
+                const selectionSound = new Audio('selection_es.wav');
+                selectionSound.volume = 1;
+                selectionSound.play();
 
                 setTimeout(() => {
                     titleSelected.style.display = 'flex';

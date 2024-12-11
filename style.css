@@ -125,6 +125,7 @@ main {
 }
 
 .press-start {
+    text-decoration: none;
     position: relative;
     text-align: center;
     color: white;
@@ -208,8 +209,8 @@ main {
 
 .character {
     position: relative;
-    width: 11vh;
-    height: 11vh;
+    width: 10vh;
+    height: 10vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -303,6 +304,11 @@ main {
     padding: 0.5em;
     font-size: 1.2rem;
     color: white;
+}
+
+.option a {
+  text-decoration: none;
+  color: white;
 }
 
 .option img {
