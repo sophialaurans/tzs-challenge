@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'x' || e.key === 'X' || e.key === 'Enter') {
                 const characterName = characters[characterIndex].querySelector('img').getAttribute('data-name');
                 if (characterName === 'Locked') {
-                    const errorSound = new Audio('sounds/error-sound.mp3');
+                    const errorSound = new Audio('sounds/error-sound.wav');
                     errorSound.currentTime = 0;
                     errorSound.volume = 1;
                     errorSound.play();

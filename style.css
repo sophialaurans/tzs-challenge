@@ -220,8 +220,8 @@ main {
 
 .characters-list .characters-column:nth-of-type(1) .character,
 .characters-list .characters-column:last-child .character {
-  width: 9.8vh;
-  height: 9.8vh;
+  width: 10vh;
+  height: 9.9vh;
 }
 
 .character img {
