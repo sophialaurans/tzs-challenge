@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalRows = 7;
             const totalCharacters = characters.length;
 
-            const transitionSound = new Audio('transition_es.wav');
+            const transitionSound = new Audio('sounds/transition_es.wav');
 
             switch (e.key) {
                 case 'ArrowUp':
@@ -62,8 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             transitionSound.play();
     
             updateSelection(); // Atualiza a seleção dos personagens sempre que uma das teclas for pressionada
-        }
-        
+        }        
 
         // Dinamismo na página index ao pressionar as teclas Espaço ou Enter
         if ((window.location.pathname.endsWith('/') || window.location.pathname.includes('index')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
@@ -87,43 +86,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (e.key === 'x' || e.key === 'X' || e.key === 'Enter') {
-                const titleSelected = document.querySelector('.title-selected');
-                const nameSelected = document.querySelector('.name-selected');
+                const characterName = characters[characterIndex].querySelector('img').getAttribute('data-name');
+                if (characterName === 'Locked') {
+                    const errorSound = new Audio('sounds/error-sound.mp3');
+                    errorSound.currentTime = 0;
+                    errorSound.volume = 1;
+                    errorSound.play();
+                } else {
+                    const titleSelected = document.querySelector('.title-selected');
+                    const nameSelected = document.querySelector('.name-selected');
 
-                const title = document.querySelector('.title');
-                title.classList.add('hide');
+                    const title = document.querySelector('.title');
+                    title.classList.add('hide');
 
-                const characterList = document.querySelector('.characters-list');
-                characterList.style.display = 'none';
+                    const characterList = document.querySelector('.characters-list');
+                    characterList.style.display = 'none';
 
-                const options = document.querySelector('.options');
-                options.classList.add('hide');
+                    const options = document.querySelector('.options');
+                    options.classList.add('hide');
 
-                characterNameP.style.display = 'none';
+                    characterNameP.style.display = 'none';
 
-                const selectionSound = new Audio('selection_es.wav');
-                selectionSound.volume = 1;
-                selectionSound.play();
+                    const selectionSound = new Audio('sounds/selection_es.wav');
+                    selectionSound.volume = 1;
+                    selectionSound.play();
 
-                setTimeout(() => {
-                    titleSelected.style.display = 'flex';
-                    nameSelected.style.display = 'flex';
-                }, 500);
+                    setTimeout(() => {
+                        titleSelected.style.display = 'flex';
+                        nameSelected.style.display = 'flex';
+                    }, 500);
 
-                setTimeout(() => {
-                    titleSelected.style.display = 'none';
-                    nameSelected.style.display = 'none';
-                    characterContainer.classList.add('zoom');
-                }, 2800);
+                    setTimeout(() => {
+                        titleSelected.style.display = 'none';
+                        nameSelected.style.display = 'none';
+                        characterContainer.classList.add('zoom');
+                    }, 2800);
 
-                setTimeout(() => {
-                    darkOverlay.style.transition = 'opacity 0.2s ease';
-                    darkOverlay.classList.add('active');
-                }, 2800);
+                    setTimeout(() => {
+                        darkOverlay.style.transition = 'opacity 0.2s ease';
+                        darkOverlay.classList.add('active');
+                    }, 2800);
 
-                setTimeout(() => {
-                    window.location.href = 'start.html'; // Navegar para a tela start ao final das mudanças
-                }, 3050);
+                    setTimeout(() => {
+                        window.location.href = 'start.html'; // Navegar para a tela start ao final das mudanças
+                    }, 3050);
+                }
             }
         }
 
