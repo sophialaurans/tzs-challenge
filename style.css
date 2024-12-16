@@ -278,8 +278,8 @@ main {
     max-width: 30vw;
     text-align: center;
     font-size: 1.2rem;
-    color: white;
-    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.582), #09004391, #090043, rgba(0, 0, 0, 0.582), transparent);
+    color: #090043;
+    background: #efeff3;
     padding: 10px 0;
     display: none;
 }
