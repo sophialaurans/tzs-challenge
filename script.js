@@ -9,61 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSelection(characters); // Atualiza a seleção dos personagens ao iniciar a página
 
-    document.addEventListener('keydown', (e) => {        
-        console.log(e.key);
-        console.log(window.location);
-
-        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-            const totalRows = 7;
-            const totalCharacters = characters.length;
-
-            const transitionSound = new Audio('sounds/transition_es.wav');
-
-            switch (e.key) {
-                case 'ArrowUp':
-                    if (characterIndex % totalRows === 0) { // Atualiza o index para o último personagem da coluna
-                        characterIndex += totalRows - 1;
-                    } else { // Atualiza o index para o personagem logo acima
-                        characterIndex -= 1;
-                    }
-                    break;
-                    
-                case 'ArrowDown':
-                    if ((characterIndex + 1) % totalRows === 0) { // Atualiza o index para o primeiro personagem da coluna
-                        characterIndex -= totalRows - 1;
-                    } else { // Atualiza o index para o personagem logo abaixo
-                        characterIndex += 1;
-                    }
-                    break;                        
-    
-                case 'ArrowLeft':
-                    if (characterIndex >= totalRows) { // Atualiza o index para o personagem logo a esquerda
-                        characterIndex -= totalRows;
-                    } else if (characterIndex === 0) { // Atualiza o index para o último da lista
-                        characterIndex = (totalCharacters - 1);
-                    } else { // Atualiza o index para o último personagem da linha anterior
-                        characterIndex += (totalCharacters - totalRows - 1);
-                    }
-                    break;
-    
-                case 'ArrowRight':
-                    if (characterIndex + totalRows < totalCharacters) { // Atualiza o index para o personagem logo a direita
-                        characterIndex += totalRows;
-                    } else if (characterIndex === (totalCharacters - 1)) { // Atualiza o index para o primeiro da lista
-                        characterIndex = 0;
-                    } else { // Atualiza o index para o primeiro personagem da linha seguinte
-                        characterIndex -= (totalCharacters - totalRows - 1);
-                    }
-                    break;
-            }
-
-            transitionSound.currentTime = 0;
-            transitionSound.volume = 1;
-            transitionSound.play();
-    
-            updateSelection(); // Atualiza a seleção dos personagens sempre que uma das teclas for pressionada
-        }        
-
+    document.addEventListener('keydown', (e) => {   
         // Dinamismo na página index ao pressionar as teclas Espaço ou Enter
         if ((window.location.pathname.endsWith('/') || window.location.pathname.includes('index')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
             const logo = document.querySelector('.logo');
@@ -81,13 +27,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Dinamismo na página select
         if ((window.location.pathname.includes('select'))) {
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                const totalRows = 7;
+                const totalCharacters = characters.length;
+
+                const transitionSound = new Audio('sounds/transition_es.wav');
+
+                switch (e.key) {
+                    case 'ArrowUp':
+                        if (characterIndex % totalRows === 0) { // Atualiza o index para o último personagem da coluna
+                            characterIndex += totalRows - 1;
+                        } else { // Atualiza o index para o personagem logo acima
+                            characterIndex -= 1;
+                        }
+                        break;
+                        
+                    case 'ArrowDown':
+                        if ((characterIndex + 1) % totalRows === 0) { // Atualiza o index para o primeiro personagem da coluna
+                            characterIndex -= totalRows - 1;
+                        } else { // Atualiza o index para o personagem logo abaixo
+                            characterIndex += 1;
+                        }
+                        break;                        
+        
+                    case 'ArrowLeft':
+                        if (characterIndex >= totalRows) { // Atualiza o index para o personagem logo a esquerda
+                            characterIndex -= totalRows;
+                        } else if (characterIndex === 0) { // Atualiza o index para o último da lista
+                            characterIndex = (totalCharacters - 1);
+                        } else { // Atualiza o index para o último personagem da linha anterior
+                            characterIndex += (totalCharacters - totalRows - 1);
+                        }
+                        break;
+        
+                    case 'ArrowRight':
+                        if (characterIndex + totalRows < totalCharacters) { // Atualiza o index para o personagem logo a direita
+                            characterIndex += totalRows;
+                        } else if (characterIndex === (totalCharacters - 1)) { // Atualiza o index para o primeiro da lista
+                            characterIndex = 0;
+                        } else { // Atualiza o index para o primeiro personagem da linha seguinte
+                            characterIndex -= (totalCharacters - totalRows - 1);
+                        }
+                        break;
+                }
+
+                transitionSound.currentTime = 0;
+                transitionSound.volume = 1;
+                transitionSound.play();
+        
+                updateSelection(); // Atualiza a seleção dos personagens sempre que uma das teclas for pressionada
+            }   
+
             if (e.key === 'o' || e.key === 'O') {
                 window.location.href = 'index.html'; // Voltar para index ao pressionar a letra "O" do teclado
             }
 
             if (e.key === 'x' || e.key === 'X' || e.key === 'Enter') {
-                const characterName = characters[characterIndex].querySelector('img').getAttribute('data-name');
-                if (characterName === 'Locked') {
+                const characterName = characters[characterIndex].querySelector('img')?.getAttribute('id');
+                if (characterName === 'locked') {
                     const errorSound = new Audio('sounds/error-sound.wav');
                     errorSound.currentTime = 0;
                     errorSound.volume = 1;
