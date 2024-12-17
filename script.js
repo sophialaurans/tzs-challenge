@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {   
         // Dinamismo na página index ao pressionar as teclas Espaço ou Enter
         if ((window.location.pathname.endsWith('/') || window.location.pathname.includes('index')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
+            const selectionSound = new Audio('sounds/selection_es.wav');
+            selectionSound.volume = 1;
+            selectionSound.play();
+            
             const logo = document.querySelector('.logo');
             logo.classList.add('grow');
 
