@@ -100,7 +100,7 @@ main {
 }
 
 .index-container {
-    background: url("img/bg2.jpg");
+    background: url("img/bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
