@@ -9,6 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSelection(characters); // Atualiza a seleção dos personagens ao iniciar a página
 
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.closest('#mainIndex')) {
+            window.location.href = 'select.html';
+        }
+
+        if (target.closest('#select')) {
+            handleSelection(); // Executa a lógica de seleção
+        }
+
+        if (target.closest('#back')) {
+            window.location.href = 'index.html'; // Redireciona para a página inicial
+        }
+    });
+
     document.addEventListener('keydown', (e) => {   
         // Dinamismo na página index ao pressionar as teclas Espaço ou Enter
         if ((window.location.pathname.endsWith('/') || window.location.pathname.includes('index')) && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) {
@@ -87,51 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (e.key === 'x' || e.key === 'X' || e.key === 'Enter') {
-                const characterName = characters[characterIndex].querySelector('img')?.getAttribute('id');
-                if (characterName === 'locked') {
-                    const errorSound = new Audio('sounds/error-sound.wav');
-                    errorSound.currentTime = 0;
-                    errorSound.volume = 1;
-                    errorSound.play();
-                } else {
-                    const titleSelected = document.querySelector('.title-selected');
-                    const nameSelected = document.querySelector('.name-selected');
-
-                    const title = document.querySelector('.title');
-                    title.classList.add('hide');
-
-                    const characterList = document.querySelector('.characters-list');
-                    characterList.style.display = 'none';
-
-                    const options = document.querySelector('.options');
-                    options.classList.add('hide');
-
-                    characterNameP.style.display = 'none';
-
-                    const selectionSound = new Audio('sounds/selection_es.wav');
-                    selectionSound.volume = 1;
-                    selectionSound.play();
-
-                    setTimeout(() => {
-                        titleSelected.style.display = 'flex';
-                        nameSelected.style.display = 'flex';
-                    }, 500);
-
-                    setTimeout(() => {
-                        titleSelected.style.display = 'none';
-                        nameSelected.style.display = 'none';
-                        characterContainer.classList.add('zoom');
-                    }, 2800);
-
-                    setTimeout(() => {
-                        darkOverlay.style.transition = 'opacity 0.2s ease';
-                        darkOverlay.classList.add('active');
-                    }, 2800);
-
-                    setTimeout(() => {
-                        window.location.href = 'start.html'; // Navegar para a tela start ao final das mudanças
-                    }, 3050);
-                }
+                handleSelection();
             }
         }
 
@@ -195,6 +166,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 showCharImg(index); // Chama a função de mostrar personagem atual
             }
         });
+    }
+
+    function handleSelection() {
+        const characterName = characters[characterIndex].querySelector('img')?.getAttribute('id');
+        if (characterName === 'locked') {
+            const errorSound = new Audio('sounds/error-sound.wav');
+            errorSound.currentTime = 0;
+            errorSound.volume = 1;
+            errorSound.play();
+        } else {
+            const titleSelected = document.querySelector('.title-selected');
+            const nameSelected = document.querySelector('.name-selected');
+
+            const title = document.querySelector('.title');
+            title.classList.add('hide');
+
+            const characterList = document.querySelector('.characters-list');
+            characterList.style.display = 'none';
+
+            const options = document.querySelector('.options');
+            options.classList.add('hide');
+
+            characterNameP.style.display = 'none';
+
+            const selectionSound = new Audio('sounds/selection_es.wav');
+            selectionSound.volume = 1;
+            selectionSound.play();
+
+            setTimeout(() => {
+                titleSelected.style.display = 'flex';
+                nameSelected.style.display = 'flex';
+            }, 500);
+
+            setTimeout(() => {
+                titleSelected.style.display = 'none';
+                nameSelected.style.display = 'none';
+                characterContainer.classList.add('zoom');
+            }, 2800);
+
+            setTimeout(() => {
+                darkOverlay.style.transition = 'opacity 0.2s ease';
+                darkOverlay.classList.add('active');
+            }, 2800);
+
+            setTimeout(() => {
+                window.location.href = 'start.html'; // Navegar para a tela start ao final das mudanças
+            }, 3050);
+        }
     }
 });
 
